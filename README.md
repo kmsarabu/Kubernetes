@@ -8,6 +8,8 @@ Certification Topics:
 
 
 
+https://blog.heptio.com/how-heptio-engineers-ace-the-certified-kubernetes-administrator-exam-93d20af32557
+
 
 https://medium.com/@KevinHoffman/taking-the-certified-kubernetes-administrator-exam-eeab17d65476
 
