@@ -157,4 +157,9 @@ systemctl daemon-reload
 systemctl enable etcd
 systemctl start etcd
 
+Backup etcd:
+
+# mkdir -p /data/backup
+# etcdctl --ca-file=/etc/etcd/ca.pem backup --backup-dir /data/backup/ --data-dir /data/etcd/snap --wal-dir /data/etcd/wal
+
 
