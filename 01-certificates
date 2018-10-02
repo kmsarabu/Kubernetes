@@ -34,3 +34,127 @@ cat > ca-csr.json <<EOF
 EOF
 
 cfssl gencert -initca ca-csr.json | cfssljson -bare ca
+
+export KUBERNETES_PUBLIC_IP_ADDRESS='10.240.0.40'
+
+cat > kubernetes-csr.json <<EOF
+{
+  "CN": "*.vmntech.com",
+  "hosts": [
+    "10.32.0.1",
+    "kubem1",
+    "kubem2",
+    "kubem1.vmntech.com",
+    "kubem2.vmntech.com",
+    "192.168.99.41",
+    "192.168.99.42",
+    "kubew1",
+    "kubew2",
+    "kubew1.vmntech.com",
+    "kubew2.vmntech.com",
+    "192.168.99.51",
+    "192.168.99.52",
+    "kubem.vmntech.com",
+    "kubernetes.vmntech.com",
+    "192.168.99.40",
+    "localhost",
+    "127.0.0.1"
+  ],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "US",
+      "L": "Princeton",
+      "O": "Kubernetes",
+      "OU": "Cluster",
+      "ST": "New Jersey"
+    }
+  ]
+}
+EOF
+
+cfssl gencert \
+  -ca=ca.pem \
+  -ca-key=ca-key.pem \
+  -config=ca-config.json \
+  -profile=kubernetes \
+  kubernetes-csr.json | cfssljson -bare kubernetes
+
+for i in kubem1 kubem2 kubew1 kubew2; do scp ca.pem kubernetes-key.pem kubernetes.pem  root@${i}:/root/ ; done
+
+mkdir -p /etc/etcd/
+mv ca.pem kubernetes-key.pem kubernetes.pem /etc/etcd/
+
+curl -L https://github.com/coreos/etcd/releases/download/v3.3.9/etcd-v3.3.9-linux-amd64.tar.gz -o etcd-v3.3.9-linux-amd64.tar.gz
+tar xzvf etcd-v3.3.9-linux-amd64.tar.gz
+cp etcd-v3.3.9-linux-amd64/etcd* /usr/bin/
+mkdir -p /data/etcd
+
+on kubem1:
+$ cat etcd.service
+[Unit]
+Description=etcd
+Documentation=https://github.com/coreos
+
+[Service]
+ExecStart=/usr/bin/etcd --name kubem1 \
+  --cert-file=/etc/etcd/kubernetes.pem \
+  --key-file=/etc/etcd/kubernetes-key.pem \
+  --peer-cert-file=/etc/etcd/kubernetes.pem \
+  --peer-key-file=/etc/etcd/kubernetes-key.pem \
+  --trusted-ca-file=/etc/etcd/ca.pem \
+  --peer-trusted-ca-file=/etc/etcd/ca.pem \
+  --initial-advertise-peer-urls https://192.168.99.41:2380 \
+  --listen-peer-urls https://192.168.99.41:2380 \
+  --listen-client-urls https://192.168.99.41:2379,http://127.0.0.1:2379 \
+  --advertise-client-urls https://192.168.99.41:2379 \
+  --initial-cluster-token etcd-cluster-0 \
+  --initial-cluster kubem1=https://192.168.99.41:2380,kubem2=https://192.168.99.42:2380 \
+  --initial-cluster-state new \
+  --data-dir=/data/etcd
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+
+on kubem2:
+$ cat etcd.service
+[Unit]
+Description=etcd
+Documentation=https://github.com/coreos
+
+[Service]
+ExecStart=/usr/bin/etcd --name kubem2 \
+  --cert-file=/etc/etcd/kubernetes.pem \
+  --key-file=/etc/etcd/kubernetes-key.pem \
+  --peer-cert-file=/etc/etcd/kubernetes.pem \
+  --peer-key-file=/etc/etcd/kubernetes-key.pem \
+  --trusted-ca-file=/etc/etcd/ca.pem \
+  --peer-trusted-ca-file=/etc/etcd/ca.pem \
+  --initial-advertise-peer-urls https://192.168.99.42:2380 \
+  --listen-peer-urls https://192.168.99.42:2380 \
+  --listen-client-urls https://192.168.99.42:2379,http://127.0.0.1:2379 \
+  --advertise-client-urls https://192.168.99.42:2379 \
+  --initial-cluster-token etcd-cluster-0 \
+  --initial-cluster kubem1=https://192.168.99.41:2380,kubem2=https://192.168.99.42:2380 \
+  --initial-cluster-state new \
+  --data-dir=/data/etcd
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+
+on kubem1/kubem2:
+
+systemctl daemon-reload
+systemctl enable etcd
+systemctl start etcd
+
+
