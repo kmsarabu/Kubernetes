@@ -1,0 +1,10 @@
+
+mkdir -p /var/lib/kubernetes
+
+
+mv ca.pem kubernetes-key.pem kubernetes.pem /var/lib/kubernetes/
+
+wget https://github.com/kubernetes/kubernetes/releases/download/v1.9.11/kubernetes.tar.gz
+tar xzvf kubernetes.tar.gz
+
+
