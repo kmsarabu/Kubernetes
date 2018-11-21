@@ -55,3 +55,8 @@ https://github.com/iMarcoGovea/books/tree/master/dev-ops/kubernetes
 Core Concepts:
  
  https://v1-11.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#-strong-api-overview-strong-
+ 
+ 
+ Practice Tests
+ 
+ https://kodekloud.com/courses/kubernetes-certification-course/lectures/6731363
