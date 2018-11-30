@@ -60,3 +60,6 @@ Core Concepts:
  Practice Tests
  
  https://kodekloud.com/courses/kubernetes-certification-course/lectures/6731363
+ 
+ Kubernetes Networking
+ https://www.youtube.com/watch?v=WwQ62OyCNz4
