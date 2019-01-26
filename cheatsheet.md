@@ -1,4 +1,4 @@
 configuring tab completion:
-  source <(kubectl completion bash)
+  > source <(kubectl completion bash)
   
  
