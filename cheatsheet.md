@@ -18,6 +18,6 @@ configuring tab completion:
 
 To switch namespace:
 
-	alias kcd='kubectl config set-context $(kubectl config current- context) --namespace '
+	alias kcd='kubectl config set-context $(kubectl config current-context) --namespace '
 	
 	kcd <namespace>
