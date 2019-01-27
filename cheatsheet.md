@@ -16,3 +16,8 @@ configuring tab completion:
   
 	   Hello World!
 
+To switch namespace:
+
+	alias kcd='kubectl config set-context $(kubectl config current- context) --namespace '
+	
+	kcd <namespace>
