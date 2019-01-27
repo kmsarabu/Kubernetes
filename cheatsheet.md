@@ -21,3 +21,10 @@ To switch namespace:
 	alias kcd='kubectl config set-context $(kubectl config current-context) --namespace '
 	
 	kcd <namespace>
+
+Starting a Proxy, rest API
+
+	kubectl --kubeconfig /Users/ksarabu/.kube/config proxy --address=0.0.0.0 --port=8080 --accep-hosts=^*$ &
+
+	curl -X GET http://localhost:8080/api/v1/namespaces/default/pods/kubia-manual-6db5774cfd-x4v2h
+	
