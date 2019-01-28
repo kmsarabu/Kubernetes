@@ -28,3 +28,10 @@ Starting a Proxy, rest API
 
 	curl -X GET http://localhost:8080/api/v1/namespaces/default/pods/kubia-manual-6db5774cfd-x4v2h
 	
+Enable Alpha features -> PodPreset
+
+	Update /etc/kubernetes/manifests/kube-apiserver.yaml:
+		
+		- --enable-admission-plugins=NodeRestriction,PodPreset
+		...
+		- --runtime-config=settings.k8s.io/v1alpha1=true
