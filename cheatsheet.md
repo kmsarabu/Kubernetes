@@ -35,3 +35,7 @@ Enable Alpha features -> PodPreset
 		- --enable-admission-plugins=NodeRestriction,PodPreset
 		...
 		- --runtime-config=settings.k8s.io/v1alpha1=true
+	
+	If the Kubernetes cluster is provisioned with kubeadm: Identify docker container id and restart it:
+	
+		docker restart <containername/ID>
