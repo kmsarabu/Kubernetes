@@ -63,3 +63,6 @@ Core Concepts:
  
  Kubernetes Networking
  https://www.youtube.com/watch?v=WwQ62OyCNz4
+
+
+https://docs.google.com/spreadsheets/d/10NltoF_6y3mBwUzQ4bcQLQfCE1BWSgUDcJXy-Qp2JEU/edit#gid=0
