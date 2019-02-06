@@ -28,6 +28,20 @@ Starting a Proxy, rest API
 
 	curl -X GET http://localhost:8080/api/v1/namespaces/default/pods/kubia-manual-6db5774cfd-x4v2h
 	
+rest API without the Proxy
+
+	$ kubectl config view -o jsonpath='{range .clusters[*]}{.cluster.server}{"\n"}{end}'
+	
+	https://192.168.99.20:6443
+	
+	$ export APISERVER=https://192.168.99.20:6443
+	
+	$ export TOKEN=$(kubectl get secrets -o jsonpath="{.items[?(@.metadata.annotations['kubernetes\.io/service-account\.name']=='default')].data.token}"|base64 -D)
+	
+	$ curl -X GET $APISERVER/api --header "Authorization: Bearer $TOKEN" --insecure
+	
+	
+	
 Enable Alpha features -> PodPreset
 
 	Update /etc/kubernetes/manifests/kube-apiserver.yaml:
