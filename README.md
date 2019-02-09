@@ -66,3 +66,9 @@ Core Concepts:
 
 
 https://docs.google.com/spreadsheets/d/10NltoF_6y3mBwUzQ4bcQLQfCE1BWSgUDcJXy-Qp2JEU/edit#gid=0
+
+
+
+CNI
+
+https://medium.com/google-cloud/understanding-the-container-storage-interface-csi-ddbeb966a3b
