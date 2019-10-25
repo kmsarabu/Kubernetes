@@ -78,3 +78,9 @@ https://medium.com/google-cloud/understanding-the-container-storage-interface-cs
 CKA
 
 https://medium.com/platformer-blog/how-i-passed-the-cka-certified-kubernetes-administrator-exam-8943aa24d71d
+
+
+CKAD EXCERSISES
+
+https://github.com/dgkanatsios/CKAD-exercises
+
