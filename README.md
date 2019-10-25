@@ -98,3 +98,9 @@ https://github.com/roxcarpio/cka-exercises
 
 https://github.com/Rikbruggink/CKA
 
+https://www.malipraveen.net/posts/cka-exam-details-and-links/
+
+https://joostvdg.github.io/kubernetes/cka-exam-prep/
+
+https://blog.autsoft.hu/certified-kubernetes-administrator/
+
