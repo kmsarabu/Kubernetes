@@ -85,3 +85,16 @@ CKAD EXCERSISES
 https://github.com/dgkanatsios/CKAD-exercises
 
 https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681
+
+https://github.com/keiransteele/cka-notes-and-exercises
+
+https://github.com/stretchcloud/cka-lab-practice
+
+https://github.com/jmyung/cka-practice
+
+https://github.com/David-VTUK/CKA-StudyGuide
+
+https://github.com/roxcarpio/cka-exercises
+
+https://github.com/Rikbruggink/CKA
+
