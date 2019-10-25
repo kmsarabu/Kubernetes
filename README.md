@@ -72,3 +72,9 @@ https://docs.google.com/spreadsheets/d/10NltoF_6y3mBwUzQ4bcQLQfCE1BWSgUDcJXy-Qp2
 CNI
 
 https://medium.com/google-cloud/understanding-the-container-storage-interface-csi-ddbeb966a3b
+
+
+
+CKA
+
+https://medium.com/platformer-blog/how-i-passed-the-cka-certified-kubernetes-administrator-exam-8943aa24d71d
