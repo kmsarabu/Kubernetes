@@ -58,22 +58,22 @@ Enable Alpha features -> PodPreset
 
 Ch1:
 
-root@km1:~/kubernetes/ch1# cat app.js
-const http = require('http');
-const os = require('os');
-console.log("Kubia server starting...");
-var handler = function(request, response) {
-  console.log("Received request from " + request.connection.remoteAddress);
-  response.writeHead(200);
-  response.end("You've hit " + os.hostname() + "\n");
-};
-var www = http.createServer(handler);
-www.listen(8080);
+	root@km1:~/kubernetes/ch1# cat app.js
+	const http = require('http');
+	const os = require('os');
+	console.log("Kubia server starting...");
+	var handler = function(request, response) {
+  	console.log("Received request from " + request.connection.remoteAddress);
+  	response.writeHead(200);
+  	response.end("You've hit " + os.hostname() + "\n");
+	};
+	var www = http.createServer(handler);
+	www.listen(8080);
 
-root@km1:~/kubernetes/ch1# cat Dockerfile 
-FROM docker.vmntech.com:5000/node:7
-ADD app.js /app.js
-ENTRYPOINT ["node", "app.js"]
+	root@km1:~/kubernetes/ch1# cat Dockerfile 
+	FROM docker.vmntech.com:5000/node:7
+	ADD app.js /app.js
+	ENTRYPOINT ["node", "app.js"]
 
 
-kubectl run kubia --image=docker.vmntech.com:5000/ch1e1 --port=8080 --generator=run/v1 --output=yaml --dry-run=true
+	kubectl run kubia --image=docker.vmntech.com:5000/ch1e1 --port=8080 --generator=run/v1 --output=yaml --dry-run=true
