@@ -105,3 +105,9 @@ https://joostvdg.github.io/kubernetes/cka-exam-prep/
 https://blog.autsoft.hu/certified-kubernetes-administrator/
 
 https://github.com/arush-sal/cka-practice-environment
+
+
+
+
+******
+https://github.com/ansilh/kubernetes-the-hardway-virtualbox
