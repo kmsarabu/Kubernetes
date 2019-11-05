@@ -37,10 +37,12 @@ rest API without the Proxy
 	$ export APISERVER=https://192.168.99.20:6443
 	
 	$ export TOKEN=$(kubectl get secrets -o jsonpath="{.items[?(@.metadata.annotations['kubernetes\.io/service-account\.name']=='default')].data.token}"|base64 -D)
+	$ root@km1:~/kubernetes# TOKEN=$(kubectl exec -ti hello-node-0 -n test1n -c hello-node -- cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+
 	
 	$ curl -X GET $APISERVER/api --header "Authorization: Bearer $TOKEN" --insecure
 	
-	
+	$ curl -X GET $APISERVER/api/v1/namespaces/test1n/pods --header "Authorization: Bearer $TOKEN" --insecure
 	
 Enable Alpha features -> PodPreset
 
