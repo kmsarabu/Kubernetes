@@ -1,18 +1,24 @@
-etcdctl snapshot save snapshot.db \
- --endpoints=https://127.0.0.1:2379 \
- --cacert=/etc/etcd/ca.crt \
- --cert=/etc/etcd/etcd-server.crt \
- --key=/etc/etcd/etcd-server.key
- 
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 snapshot save /tmp/snapshot-pre-boot.db \
+ --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+ --cert=/etc/kubernetes/pki/etcd/server.crt \
+ --key=/etc/kubernetes/pki/etcd/server.key
 
 ls snapshot.db
 
-etcdctl snapshot status snapshot.db
+ETCDCTL_API=3 etcdctl snapshot status /tmp/snapshot-pre-boot.db
 
 service kube-apiserver stop
 
-etcdctl snapshot restore --data-dr /var/lib/etcd-newdb --initial-cluster master1=host:port,host:port \
---initial-cluster-token etcd-cluster-1 --initial-advertise-peer-urls <host>:2380
+https://github.com/mmumshad/kubernetes-the-hard-way/blob/master/practice-questions-answers/cluster-maintenance/backup-etcd/etcd-backup-and-restore.md
+
+ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+     --name=master \
+     --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key \
+     --data-dir /var/lib/etcd-from-backup \
+     --initial-cluster=master=https://127.0.0.1:2380 \
+     --initial-cluster-token etcd-cluster-1 \
+     --initial-advertise-peer-urls=https://127.0.0.1:2380 \
+     snapshot restore /tmp/snapshot-pre-boot.db
 
 update etcd.service with new data location, cluster token, etc
 
