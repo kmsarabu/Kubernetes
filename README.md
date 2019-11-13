@@ -106,7 +106,7 @@ https://blog.autsoft.hu/certified-kubernetes-administrator/
 
 https://github.com/arush-sal/cka-practice-environment
 
-
+https://www.katacoda.com/courses/kubernetes
 
 
 ******
