@@ -111,3 +111,9 @@ https://www.katacoda.com/courses/kubernetes
 
 ******
 https://github.com/ansilh/kubernetes-the-hardway-virtualbox
+
+
+
+metrics-server i/o timeout error workaround:
+
+https://github.com/kubernetes-sigs/metrics-server/issues/278#issuecomment-546638711
